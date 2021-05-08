@@ -1,5 +1,11 @@
 # fizz-buzz REST server
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/gulien/fizz-buzz.svg)](https://pkg.go.dev/github.com/gulien/fizz-buzz)
+[![Tests](https://github.com/gulien/fizz-buzz/actions/workflows/tests.yml/badge.svg)](https://github.com/gulien/fizz-buzz/actions/workflows/tests.yml)
+[![Lint](https://github.com/gulien/fizz-buzz/actions/workflows/lint.yml/badge.svg)](https://github.com/gulien/fizz-buzz/actions/workflows/lint.yml)
+[![codecov](https://codecov.io/gh/gulien/fizz-buzz/branch/master/graph/badge.svg?token=60U5BV3JM8)](https://codecov.io/gh/gulien/fizz-buzz)
+[![Go Report Card](https://goreportcard.com/badge/github.com/gulien/fizz-buzz)](https://goreportcard.com/report/github.com/gulien/fizz-buzz)
+
 A simple fizz-buzz REST server with statistics.
 
 ```
@@ -10,11 +16,11 @@ Usage of fizzbuzz:
 
 ## Endpoints
  
-### Ping - GET `/`
+### GET `/`
 
 Basic health check, always returns `200` if the server is running.
 
-### Fizz-buzz - GET `/api/v1/fizz-buzz`
+### GET `/api/v1/fizz-buzz`
 
 This endpoint returns a JSON list of strings with numbers from 1 to `limit`, where: 
 all multiples of `int1` are replaced by `str1`, all multiples of `int2` are replaced by `str2`, 
@@ -56,7 +62,7 @@ It accepts the following query parameters:
 ```
 </details>
 
-### Statistics - GET `/api/v1/stats`
+### GET `/api/v1/stats`
 
 TODO.
 
@@ -77,11 +83,3 @@ TODO.
 * `make godoc` - Runs a local webserver for godoc
 * `make run` - Runs the application (`PORT` and `TIMEOUT` are available as variables, i.e, `make run PORT=80 TIMEOUT=30`)
 * `make build` - Builds the application (`VERSION` is available as variable, i.e, `make build VERSION=foo`)
-
-## Badges
-
-[![Go Reference](https://pkg.go.dev/badge/github.com/gulien/fizz-buzz.svg)](https://pkg.go.dev/github.com/gulien/fizz-buzz)
-[![Tests](https://github.com/gulien/fizz-buzz/actions/workflows/tests.yml/badge.svg)](https://github.com/gulien/fizz-buzz/actions/workflows/tests.yml)
-[![Lint](https://github.com/gulien/fizz-buzz/actions/workflows/lint.yml/badge.svg)](https://github.com/gulien/fizz-buzz/actions/workflows/lint.yml)
-[![codecov](https://codecov.io/gh/gulien/fizz-buzz/branch/master/graph/badge.svg?token=60U5BV3JM8)](https://codecov.io/gh/gulien/fizz-buzz)
-[![Go Report Card](https://goreportcard.com/badge/github.com/gulien/fizz-buzz)](https://goreportcard.com/report/github.com/gulien/fizz-buzz)
