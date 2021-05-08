@@ -11,7 +11,7 @@ import (
 	"testing"
 	"time"
 
-	"github.come/gulien/fizz-buzz/pkg/fizzbuzz"
+	"github.com/gulien/fizz-buzz/pkg/fizzbuzz"
 )
 
 func TestFizzBuzzHandler(t *testing.T) {

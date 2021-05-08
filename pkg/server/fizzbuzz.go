@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/gulien/fizz-buzz/pkg/fizzbuzz"
 	"github.com/labstack/echo/v4"
-	"github.come/gulien/fizz-buzz/pkg/fizzbuzz"
 )
 
 func fizzBuzzHandler(timeout time.Duration) echo.HandlerFunc {

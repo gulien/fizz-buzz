@@ -9,8 +9,8 @@ import (
 	"os/signal"
 	"time"
 
+	"github.com/gulien/fizz-buzz/pkg/server"
 	flag "github.com/spf13/pflag"
-	"github.come/gulien/fizz-buzz/pkg/server"
 )
 
 var version = "snapshot"
