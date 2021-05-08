@@ -10,11 +10,11 @@ Usage of fizzbuzz:
 
 ## Endpoints
  
-**Ping** - GET `/`
+### Ping - GET `/`
 
 Basic health check, always returns `200` if the server is running.
 
-**Fizz-buzz** - GET `/api/v1/fizz-buzz`
+### Fizz-buzz - GET `/api/v1/fizz-buzz`
 
 This endpoint returns a JSON list of strings with numbers from 1 to `limit`, where: 
 all multiples of `int1` are replaced by `str1`, all multiples of `int2` are replaced by `str2`, 
@@ -31,34 +31,32 @@ It accepts the following query parameters:
 <details>
     <summary>Example (200 OK)</summary>
 
-    `/api/v1/fizz-buzz?int1=2&int2=3&limit=10&str1=foo&str2=bar`
+`/api/v1/fizz-buzz?int1=2&int2=3&limit=10&str1=foo&str2=bar`
 
-    ```json
-    ["1","foo","bar","foo","5","foobar","7","foo","bar","foo"]
-    ```
+```json
+["1","foo","bar","foo","5","foobar","7","foo","bar","foo"]
+```
 </details>
 
 <details>
     <summary>Example (400 Bad Request)</summary>
 
-    `/api/v1/fizz-buzz?int1=2&int2=0&limit=10&str1=foo&str2=bar`
+`/api/v1/fizz-buzz?int1=2&int2=0&limit=10&str1=foo&str2=bar`
 
-    ```json
-    {"message":"{"message":"zero int1 and/or int2"}"}
-    ```
+```json
+{"message":"zero int1 and/or int2"}
+```
 </details>
 
 <details>
     <summary>Example (503 Service Unavailable)</summary>
 
-    `/api/v1/fizz-buzz?int1=2&int2=3&limit=10&str1=foo&str2=bar`
-
-    ```json
-    {"message":"context deadline exceeded"}
-    ```
+```json
+{"message":"context deadline exceeded"}
+```
 </details>
 
-**Statistics** - GET `/api/v1/stats`
+### Statistics - GET `/api/v1/stats`
 
 TODO.
 
