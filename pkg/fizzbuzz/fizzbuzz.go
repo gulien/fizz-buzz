@@ -8,7 +8,9 @@ import (
 )
 
 var (
-	ErrZeroInt             = errors.New("zero int1 and/or int2")
+	// ErrZeroInt happens if int1 and/or int2 are equals to zero.
+	ErrZeroInt = errors.New("zero int1 and/or int2")
+	// ErrNegativeOrZeroLimit happens if limit is negative or zero.
 	ErrNegativeOrZeroLimit = errors.New("negative or zero limit")
 )
 
