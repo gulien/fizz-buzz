@@ -1,4 +1,4 @@
-module github.come/gulien/fizz-buzz
+module github.com/gulien/fizz-buzz
 
 go 1.16
 
