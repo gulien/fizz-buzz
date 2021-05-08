@@ -1,11 +1,11 @@
-.PHONY: fmt lint tests todos godoc run
+.PHONY: fmt lint tests todos godoc run build
 
 # Formats the code, "optimizes" the modules' dependencies.
 fmt:
 	go fmt ./...
 	go mod tidy
 
-# Run linters.
+# Runs linters.
 lint:
 	golangci-lint run
 
@@ -21,15 +21,21 @@ todos:
 	--disable-all \
 	--enable godox
 
-# Runs a webserver for godoc.
+# Runs a local webserver for godoc.
 godoc:
 	$(info http://localhost:6060/pkg/github.com/gulien/fizz-buzz)
 	godoc -http=:6060
 
 # Runs the application.
-VERSION=snapshot
 PORT=80
 TIMEOUT=30
 
 run:
-	go run -ldflags "-X main.version=$(VERSION)" cmd/fizzbuzz/main.go --port=$(PORT) --timeout=$(TIMEOUT)
+	go run -ldflags cmd/fizzbuzz/main.go --port=$(PORT) --timeout=$(TIMEOUT)
+
+
+# Builds the application.
+VERSION=snapshot
+
+build:
+	go build -ldflags "-X main.version=$(VERSION)" -o=fizzbuzz cmd/fizzbuzz/main.go
