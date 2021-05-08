@@ -7,34 +7,17 @@ fmt:
 
 # Run linters.
 lint:
-	golangci-lint run \
-	--disable-all \
-	--enable bodyclose \
-	--enable deadcode \
-	--enable errcheck \
-	--enable gofmt \
-	--enable goimports \
-	--enable gosec \
-	--enable gosimple \
-	--enable govet \
-	--enable ineffassign \
-	--enable misspell \
-	--enable prealloc \
-	--enable staticcheck \
-	--enable structcheck \
-	--enable typecheck \
-	--enable unconvert \
-	--enable unused \
-	--enable varcheck
+	golangci-lint run
 
 # Runs tests.
 tests:
 	go test -race -covermode=atomic -coverprofile=coverage.out ./... &&\
-    go tool cover -html=coverage.out -o coverage.html
+	go tool cover -html=coverage.out -o coverage.html
 
 # Shows TODOs.
 todos:
 	golangci-lint run \
+	--no-config \
 	--disable-all \
 	--enable godox
 
