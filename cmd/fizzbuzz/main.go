@@ -42,7 +42,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	srv := server.New(time.Duration(timeout) * time.Millisecond)
+	srv := server.New(time.Duration(timeout) * time.Second)
 
 	go func() {
 		err := srv.Start(fmt.Sprintf(":%d", port))
