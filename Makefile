@@ -11,8 +11,8 @@ lint:
 
 # Runs tests.
 tests:
-	go test -race -covermode=atomic -coverprofile=coverage.out ./... &&\
-	go tool cover -html=coverage.out -o coverage.html
+	go test -race -covermode=atomic -coverprofile=coverage.txt ./... &&\
+	go tool cover -html=coverage.txt -o coverage.html
 
 # Shows TODOs.
 todos:
