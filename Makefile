@@ -1,4 +1,4 @@
-.PHONY: fmt lint tests todos godoc
+.PHONY: fmt lint tests todos godoc run
 
 # Formats the code, "optimizes" the modules' dependencies.
 fmt:
