@@ -31,7 +31,7 @@ PORT=80
 TIMEOUT=30
 
 run:
-	go run -ldflags cmd/fizzbuzz/main.go --port=$(PORT) --timeout=$(TIMEOUT)
+	go run cmd/fizzbuzz/main.go --port=$(PORT) --timeout=$(TIMEOUT)
 
 
 # Builds the application.
