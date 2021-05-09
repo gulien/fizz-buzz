@@ -115,8 +115,9 @@ func TestFizzBuzzHandler(t *testing.T) {
 		{
 			int1:             "2",
 			int2:             "3",
-			limit:            "10",
+			limit:            "100000",
 			expectStatusCode: http.StatusServiceUnavailable,
+			timeout:          time.Duration(1) * time.Nanosecond,
 			expectJSON: func() string {
 				return fmt.Sprintf(`{"message":"%s"}`, context.DeadlineExceeded)
 			}(),
