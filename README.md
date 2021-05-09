@@ -11,7 +11,7 @@ A simple fizz-buzz REST server with statistics.
 ```
 Usage of fizzbuzz:
       --port int      Set the port on which the fizz-buzz server should listen (default 80)
-      --timeout int   Set the maximum duration in seconds before timing out execution of a request (default 30)
+      --timeout int   Set the maximum duration in seconds before timing out execution of fizz-buzz (default 30)
 ```
 
 ## Endpoints
@@ -23,8 +23,8 @@ Basic health check, always returns `200` if the server is running.
 ### GET `/api/v1/fizz-buzz`
 
 This endpoint returns a JSON list of strings with numbers from 1 to `limit`, where: 
-all multiples of `int1` are replaced by `str1`, all multiples of `int2` are replaced by `str2`, 
-all multiples of `int1` and `int2` are replaced by `str1str2`.
+all multiples of `int1` are replaced by `str1`, all multiples of `int2` are replaced
+by `str2`, all multiples of `int1` and `int2` are replaced by `str1str2`.
 
 It accepts the following query parameters:
 
@@ -64,7 +64,27 @@ It accepts the following query parameters:
 
 ### GET `/api/v1/stats`
 
-TODO.
+This endpoint returns a JSON object with the parameters of the most frequent request and
+the number of occurrences of this request.
+
+<details>
+    <summary>Example (200 OK)</summary>
+
+`/api/v1/stats`
+
+```json
+{"count":10,"int1":"2","int2":"3","limit":"10","str1":"foo","str2":"bar"}
+```
+</details>
+ 
+📣 Current implementation of this endpoint relies on an in memory data source.
+In other words, the statistics are not persisted between runs nor are they relevant
+in a distributed environment.
+
+However, one may provide its own data source implementation by implementing the
+`stats.Statitistics` interface. Suitable data sources could be either No-SQL or SQL.
+For the latter, the implementer will have to make sure the requests' parameters do not
+lead to SQL injection (e.g., `str1` equals `DROP TABLE foo;`).
 
 ## Development
 
