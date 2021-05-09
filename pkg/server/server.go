@@ -14,6 +14,7 @@ func New(statistics stats.Statistics, timeout time.Duration) *echo.Echo {
 	e.HideBanner = true
 
 	// Middlewares.
+	e.Use(middleware.Recover())
 	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
 		Skipper: func(c echo.Context) bool {
 			// No logging for the ping handler as it may output a lot of logs
@@ -21,7 +22,6 @@ func New(statistics stats.Statistics, timeout time.Duration) *echo.Echo {
 			return c.Request().URL.Path == "/"
 		},
 	}))
-	e.Use(middleware.Recover())
 
 	// Routes.
 	e.GET("/", pingHandler())
