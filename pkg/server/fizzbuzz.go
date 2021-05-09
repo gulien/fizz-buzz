@@ -8,11 +8,26 @@ import (
 	"time"
 
 	"github.com/gulien/fizz-buzz/pkg/fizzbuzz"
+	"github.com/gulien/fizz-buzz/pkg/stats"
 	"github.com/labstack/echo/v4"
 )
 
-func fizzBuzzHandler(timeout time.Duration) echo.HandlerFunc {
+func fizzBuzzHandler(statistics stats.Statistics, timeout time.Duration) echo.HandlerFunc {
 	return func(c echo.Context) error {
+		// Statistics.
+		err := statistics.AddEntry(stats.Entry{
+			Int1:  c.QueryParam("int1"),
+			Int2:  c.QueryParam("int2"),
+			Limit: c.QueryParam("limit"),
+			Str1:  c.QueryParam("str1"),
+			Str2:  c.QueryParam("str2"),
+		})
+
+		if err != nil {
+			// Fail loud.
+			return err
+		}
+
 		ctx, cancel := context.WithTimeout(context.Background(), timeout)
 		defer cancel()
 
@@ -22,7 +37,7 @@ func fizzBuzzHandler(timeout time.Duration) echo.HandlerFunc {
 		)
 
 		// err = first error.
-		err := echo.QueryParamsBinder(c).
+		err = echo.QueryParamsBinder(c).
 			FailFast(true).
 			MustInt("int1", &int1).
 			MustInt("int2", &int2).

@@ -1,3 +1,4 @@
+// fizzbuzz is a simple fizz-buzz REST server with statistics.
 package main
 
 import (
@@ -10,17 +11,16 @@ import (
 	"time"
 
 	"github.com/gulien/fizz-buzz/pkg/server"
+	"github.com/gulien/fizz-buzz/pkg/stats"
 	flag "github.com/spf13/pflag"
 )
 
 var version = "snapshot"
 
 func main() {
-	fmt.Printf("[SYSTEM] version %s\n", version)
-
 	fs := flag.NewFlagSet("fizzbuzz", flag.ExitOnError)
 	fs.Int("port", 80, "Set the port on which the fizz-buzz server should listen")
-	fs.Int("timeout", 30, "Set the maximum duration in seconds before timing out execution of a request")
+	fs.Int("timeout", 30, "Set the maximum duration in seconds before timing out execution of fizz-buzz")
 
 	// Parses the flags...
 	err := fs.Parse(os.Args[1:])
@@ -28,6 +28,8 @@ func main() {
 		fmt.Println(err)
 		os.Exit(1)
 	}
+
+	fmt.Printf("[SYSTEM] version %s\n", version)
 
 	// and gets their values.
 	port, err := fs.GetInt("port")
@@ -42,7 +44,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	srv := server.New(time.Duration(timeout) * time.Second)
+	srv := server.New(stats.NewInMemory(), time.Duration(timeout)*time.Second)
 
 	go func() {
 		err := srv.Start(fmt.Sprintf(":%d", port))

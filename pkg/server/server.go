@@ -3,12 +3,13 @@ package server
 import (
 	"time"
 
+	"github.com/gulien/fizz-buzz/pkg/stats"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
 
 // New returns an instance of echo.Echo.
-func New(timeout time.Duration) *echo.Echo {
+func New(statistics stats.Statistics, timeout time.Duration) *echo.Echo {
 	e := echo.New()
 	e.HideBanner = true
 
@@ -25,7 +26,8 @@ func New(timeout time.Duration) *echo.Echo {
 	// Routes.
 	e.GET("/", pingHandler())
 	api := e.Group("/api/v1")
-	api.GET("/fizz-buzz", fizzBuzzHandler(timeout))
+	api.GET("/fizz-buzz", fizzBuzzHandler(statistics, timeout))
+	api.GET("/stats", statsHandler(statistics))
 
 	return e
 }

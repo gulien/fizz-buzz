@@ -5,10 +5,12 @@ import (
 	"net/http/httptest"
 	"testing"
 	"time"
+
+	"github.com/gulien/fizz-buzz/pkg/stats"
 )
 
 func TestPingHandler(t *testing.T) {
-	e := New(time.Duration(1) * time.Second)
+	e := New(stats.NewInMemory(), time.Duration(1)*time.Second)
 	req := httptest.NewRequest(http.MethodGet, "/", nil)
 	rec := httptest.NewRecorder()
 

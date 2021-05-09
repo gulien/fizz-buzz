@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/gulien/fizz-buzz/pkg/fizzbuzz"
+	"github.com/gulien/fizz-buzz/pkg/stats"
 )
 
 func TestFizzBuzzHandler(t *testing.T) {
@@ -138,17 +139,17 @@ func TestFizzBuzzHandler(t *testing.T) {
 		q.Add("str1", tc.str1)
 		q.Add("str2", tc.str2)
 
-		e := New(tc.timeout)
+		e := New(stats.NewInMemory(), tc.timeout)
 		req := httptest.NewRequest(http.MethodGet, "/api/v1/fizz-buzz?"+q.Encode(), nil)
 		rec := httptest.NewRecorder()
 
 		e.ServeHTTP(rec, req)
-		actualJSON := strings.TrimSpace(rec.Body.String())
 
 		if tc.expectStatusCode != rec.Code {
 			t.Errorf("test %d: expected status code %d but got %d", i, tc.expectStatusCode, rec.Code)
 		}
 
+		actualJSON := strings.TrimSpace(rec.Body.String())
 		if !reflect.DeepEqual(tc.expectJSON, actualJSON) {
 			t.Errorf("test %d: expected response '%s', but got: '%s'", i, tc.expectJSON, actualJSON)
 		}
